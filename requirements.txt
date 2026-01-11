@@ -1,0 +1,21 @@
+# Core
+google-genai>=1.57.0
+pydantic>=2.12.5
+
+# MCP Server
+mcp>=1.25.0
+
+# ADK (optional)
+google-adk>=1.22.0
+
+# CLI
+typer>=0.21.1
+rich>=14.2.0
+
+# Web UI
+streamlit>=1.52.2
+
+# Development
+pytest>=9.0.2
+pytest-asyncio>=1.3.0
+python-dotenv>=1.2.1
