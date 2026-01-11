@@ -1,6 +1,6 @@
 # Gemini Research Tools MCP
 
-Gemini API の各種リサーチ機能（Deep Research、Quick Search、URL 分析）を統合し、複数のインターフェースから利用できるようにする MCP サーバーです。訳あってラップして使いたい時にサンプルとして使ってください。
+Gemini API の各種リサーチ機能を統合し、MCP Server / Web UI / CLI / ADK Tool など複数のインターフェースから利用できるようにするツールキットです。Gemini API のリサーチ機能をラップして独自のアプリケーションに統合したい場合のサンプル・リファレンス実装として活用できます。
 
 ## 🎯 概要
 
@@ -10,7 +10,7 @@ Gemini API の各種リサーチ機能（Deep Research、Quick Search、URL 分�
 | ----------------- | ----------------------------------------------- | ---------- | ------------------------------------------ |
 | **Deep Research** | Interactions API を使用した包括的な深層リサーチ | 分単位     | 詳細レポート、市場分析、競合調査           |
 | **Quick Search**  | Google Search grounding による高速 Web 検索     | 秒単位     | 最新ニュース、ファクトチェック、簡単な質問 |
-| **URL 分析**      | URL Context tool による特定 URL の分析・比較    | 秒単位     | 記事比較、ドキュメント要約、コード分析     |
+| **URL Analysis**  | URL Context tool による特定 URL の分析・比較    | 秒単位     | 記事比較、ドキュメント要約、コード分析     |
 
 ### 提供インターフェース
 
@@ -122,11 +122,18 @@ Interactions API を使用して、複雑なトピックについて自律的に
 
 Google Search grounding を使用して、リアルタイムの Web 情報を高速に取得します。
 
-| ツール名             | 説明                                | レイテンシ |
-| -------------------- | ----------------------------------- | ---------- |
-| `quick_search`       | Google Search を使った高速 Web 検索 | 秒単位     |
-| `analyze_urls`       | 特定 URL の内容を分析・比較         | 秒単位     |
-| `search_and_analyze` | Web 検索 + URL 分析のコンボ         | 秒単位     |
+| ツール名       | 説明                                | レイテンシ |
+| -------------- | ----------------------------------- | ---------- |
+| `quick_search` | Google Search を使った高速 Web 検索 | 秒単位     |
+
+##### 🔗 URL Analysis ツール（秒単位、特定 URL の分析）
+
+URL Context tool を使用して、特定の URL の内容を取得・分析します。
+
+| ツール名             | 説明                        | レイテンシ |
+| -------------------- | --------------------------- | ---------- |
+| `analyze_urls`       | 特定 URL の内容を分析・比較 | 秒単位     |
+| `search_and_analyze` | Web 検索 + URL 分析のコンボ | 秒単位     |
 
 #### ツールの使い分けガイド
 
@@ -253,7 +260,6 @@ gemini-research-tools-mcp/
 │   │   └── main.py     # Typer CLI
 │   └── ui/             # Web UI
 │       └── app.py      # Streamlit
-├── docs/               # ドキュメント
 ├── tests/              # テスト
 ├── pyproject.toml
 ├── requirements.txt
@@ -274,7 +280,7 @@ gemini-research-tools-mcp/
 | ---------------------- | ---------- | -------------------------------------------------------------- |
 | **Deep Research**      | ❌ 不可    | エージェント `deep-research-pro-preview-12-2025` 固定          |
 | **Quick Search**       | ✅ 可能    | `gemini-3-flash-preview`（デフォルト）, `gemini-3-pro-preview` |
-| **URL 分析**           | ✅ 可能    | `gemini-3-flash-preview`（デフォルト）, `gemini-3-pro-preview` |
+| **URL Analysis**       | ✅ 可能    | `gemini-3-flash-preview`（デフォルト）, `gemini-3-pro-preview` |
 | **search_and_analyze** | ✅ 可能    | `gemini-3-flash-preview`（デフォルト）, `gemini-3-pro-preview` |
 
 ## 📝 API リファレンス
@@ -356,7 +362,7 @@ print(result.content)
 - **モデル**: `gemini-3-flash-preview`（デフォルト）または `gemini-3-pro-preview`
 - **API**: `types.Tool(google_search=types.GoogleSearch())`
 
-### URL 分析（URL Context tool）
+### URL Analysis（URL Context tool）
 
 - **実行時間**: 通常数秒で完了
 - **モデル**: `gemini-3-flash-preview`（デフォルト）または `gemini-3-pro-preview`
