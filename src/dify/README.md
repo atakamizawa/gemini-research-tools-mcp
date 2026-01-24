@@ -26,11 +26,14 @@ Google Gemini API を活用した包括的なリサーチツールを Dify に�
 1. プラグインをパッケージ化:
 
    ```bash
-   cd src
-   dify plugin package ./dify
+   # プロジェクトルートから実行
+   dify plugin package ./src/dify
+
+   # 生成されたファイルをリネーム（任意）
+   mv dify.difypkg gemini-research.difypkg
    ```
 
-2. 生成された `gemini-research.difypkg` を Dify にアップロード
+2. 生成された `dify.difypkg`（または `gemini-research.difypkg`）を Dify にアップロード
 
 ### 方法 2: リモートデバッグ
 
