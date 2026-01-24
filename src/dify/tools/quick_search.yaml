@@ -1,0 +1,55 @@
+identity:
+  name: quick_search
+  author: atakamizawa
+  label:
+    en_US: Quick Search
+    ja_JP: ⚡ クイック検索
+    zh_Hans: 快速搜索
+description:
+  human:
+    en_US: Perform a quick web search using Google Search grounding. Responses typically return in seconds. Best for quick lookups, latest news, and simple questions.
+    ja_JP: Google検索を使って最新情報を素早く取得します。リアルタイムの情報や簡単な質問に最適です（数秒で応答）。
+    zh_Hans: 使用 Google Search grounding 进行快速网络搜索。响应通常在几秒钟内返回。适合快速查询、最新新闻和简单问题。
+  llm: Fast web search for quick lookups and current information. Returns in seconds. Use for latest news, simple facts, and real-time information.
+parameters:
+  - name: query
+    type: string
+    required: true
+    label:
+      en_US: Search Query
+      ja_JP: 検索クエリ
+      zh_Hans: 搜索查询
+    human_description:
+      en_US: The search query
+      ja_JP: 検索クエリ
+      zh_Hans: 搜索查询
+    llm_description: Keywords or question to search for
+    form: llm
+  - name: language
+    type: select
+    required: false
+    default: ja
+    options:
+      - value: ja
+        label:
+          en_US: Japanese
+          ja_JP: 日本語
+          zh_Hans: 日语
+      - value: en
+        label:
+          en_US: English
+          ja_JP: 英語
+          zh_Hans: 英语
+    label:
+      en_US: Response Language
+      ja_JP: 回答言語
+      zh_Hans: 响应语言
+    human_description:
+      en_US: Language for the response
+      ja_JP: 回答の言語
+      zh_Hans: 响应的语言
+    llm_description: Language for the response (ja or en)
+    form: form
+extra:
+  python:
+    source: tools/quick_search.py

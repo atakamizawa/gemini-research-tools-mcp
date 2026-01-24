@@ -1,0 +1,68 @@
+identity:
+  name: search_and_analyze
+  author: atakamizawa
+  label:
+    en_US: Search and Analyze
+    ja_JP: 🔍 Web検索 + URL分析
+    zh_Hans: 搜索和分析
+description:
+  human:
+    en_US: Combine web search with URL analysis for comprehensive research. Useful for comparing search results with specific documents or fact-checking claims.
+    ja_JP: Web検索結果と特定URLの内容を組み合わせて分析します。検索結果と既知の情報を照らし合わせたい時や、ファクトチェックに便利です。
+    zh_Hans: 将网络搜索与 URL 分析相结合进行综合研究。适用于将搜索结果与特定文档进行比较或事实核查。
+  llm: Search the web and optionally include specific URLs for context. Use for comparing search results with reference documents or fact-checking claims against authoritative sources.
+parameters:
+  - name: query
+    type: string
+    required: true
+    label:
+      en_US: Query
+      ja_JP: クエリ
+      zh_Hans: 查询
+    human_description:
+      en_US: Search and analysis query
+      ja_JP: 検索と分析のクエリ
+      zh_Hans: 搜索和分析查询
+    llm_description: The search query and analysis instructions
+    form: llm
+  - name: urls
+    type: string
+    required: false
+    label:
+      en_US: Reference URLs
+      ja_JP: 参照 URL
+      zh_Hans: 参考 URL
+    human_description:
+      en_US: Optional URLs to include for context (comma-separated)
+      ja_JP: コンテキストに含めるオプションの URL（カンマ区切り）
+      zh_Hans: 可选的上下文 URL（逗号分隔）
+    llm_description: Optional comma-separated URLs to include as reference
+    form: llm
+  - name: language
+    type: select
+    required: false
+    default: ja
+    options:
+      - value: ja
+        label:
+          en_US: Japanese
+          ja_JP: 日本語
+          zh_Hans: 日语
+      - value: en
+        label:
+          en_US: English
+          ja_JP: 英語
+          zh_Hans: 英语
+    label:
+      en_US: Response Language
+      ja_JP: 回答言語
+      zh_Hans: 响应语言
+    human_description:
+      en_US: Language for the response
+      ja_JP: 回答の言語
+      zh_Hans: 响应的语言
+    llm_description: Language for the response (ja or en)
+    form: form
+extra:
+  python:
+    source: tools/search_and_analyze.py

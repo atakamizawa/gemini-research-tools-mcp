@@ -1,0 +1,30 @@
+identity:
+  name: get_research_result
+  author: atakamizawa
+  label:
+    en_US: Get Research Result
+    ja_JP: 🔬 Deep Research：結果取得
+    zh_Hans: 获取研究结果
+description:
+  human:
+    en_US: Retrieve the result of a completed research task. Use this after get_research_status indicates the task is completed.
+    ja_JP: 完了したDeep Researchのレポートと引用元を取得します。「進捗確認」でステータスが「completed」になってから使用してください。
+    zh_Hans: 获取已完成研究任务的结果。在 get_research_status 显示任务已完成后使用。
+  llm: Get the full research report after the task is completed. Only call this after get_research_status returns "completed" status.
+parameters:
+  - name: interaction_id
+    type: string
+    required: true
+    label:
+      en_US: Interaction ID
+      ja_JP: インタラクション ID
+      zh_Hans: 交互 ID
+    human_description:
+      en_US: The interaction ID returned from deep_research
+      ja_JP: deep_research から返されたインタラクション ID
+      zh_Hans: 从 deep_research 返回的交互 ID
+    llm_description: The interaction ID from a previous deep_research call
+    form: llm
+extra:
+  python:
+    source: tools/get_research_result.py

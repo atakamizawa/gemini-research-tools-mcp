@@ -1,0 +1,71 @@
+identity:
+  name: deep_research
+  author: atakamizawa
+  label:
+    en_US: Deep Research
+    ja_JP: 🔬 Deep Research：開始
+    zh_Hans: 深度研究
+description:
+  human:
+    en_US: Execute comprehensive deep research on a topic using Gemini Deep Research Agent. Research tasks typically take several minutes to complete. Best for complex topics requiring in-depth analysis.
+    ja_JP: あるトピックについて、Web上の情報を幅広く調査し、詳細なレポートを作成します。処理に数分〜数十分かかります。複雑なトピックの深い分析に最適です。
+    zh_Hans: 使用 Gemini Deep Research Agent 对主题进行全面深入研究。研究任务通常需要几分钟才能完成。适合需要深入分析的复杂主题。
+  llm: Execute comprehensive deep research on a topic. Returns an interaction_id for tracking. Research takes several minutes. Best for complex topics requiring in-depth analysis with multiple sources.
+parameters:
+  - name: query
+    type: string
+    required: true
+    label:
+      en_US: Research Query
+      ja_JP: リサーチクエリ
+      zh_Hans: 研究查询
+    human_description:
+      en_US: The research topic or question to investigate
+      ja_JP: 調査するリサーチトピックまたは質問
+      zh_Hans: 要调查的研究主题或问题
+    llm_description: The research topic or question to investigate comprehensively
+    form: llm
+  - name: format_instructions
+    type: string
+    required: false
+    label:
+      en_US: Format Instructions
+      ja_JP: フォーマット指示
+      zh_Hans: 格式说明
+    human_description:
+      en_US: Optional instructions for formatting the output
+      ja_JP: 出力フォーマットの指示（オプション）
+      zh_Hans: 输出格式的可选说明
+    llm_description: Optional formatting instructions for the research output
+    form: llm
+  - name: wait_for_completion
+    type: boolean
+    required: false
+    default: false
+    label:
+      en_US: Wait for Completion
+      ja_JP: 完了まで待機
+      zh_Hans: 等待完成
+    human_description:
+      en_US: If true, wait for research to complete (may take several minutes)
+      ja_JP: true の場合、リサーチ完了まで待機（数分かかる場合があります）
+      zh_Hans: 如果为 true，等待研究完成（可能需要几分钟）
+    llm_description: Whether to wait for research completion or return immediately with interaction_id
+    form: form
+  - name: timeout
+    type: number
+    required: false
+    default: 3600
+    label:
+      en_US: Timeout (seconds)
+      ja_JP: タイムアウト（秒）
+      zh_Hans: 超时（秒）
+    human_description:
+      en_US: Maximum time to wait for research completion
+      ja_JP: リサーチ完了を待つ最大時間
+      zh_Hans: 等待研究完成的最长时间
+    llm_description: Maximum seconds to wait for completion (default 3600)
+    form: form
+extra:
+  python:
+    source: tools/deep_research.py

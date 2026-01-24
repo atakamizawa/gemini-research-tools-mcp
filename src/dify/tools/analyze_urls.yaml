@@ -1,0 +1,68 @@
+identity:
+  name: analyze_urls
+  author: atakamizawa
+  label:
+    en_US: Analyze URLs
+    ja_JP: 📄 URL コンテンツ分析
+    zh_Hans: 分析 URL
+description:
+  human:
+    en_US: Analyze content from specific URLs. Useful for comparing documents, extracting data, summarizing pages. Maximum 20 URLs per request.
+    ja_JP: 指定したURLのWebページを読み取り、内容を分析・要約・比較します。複数ページの比較分析にも対応（最大20URL）。
+    zh_Hans: 分析特定 URL 的内容。适用于比较文档、提取数据、总结页面。每个请求最多 20 个 URL。
+  llm: Fetch and analyze content from specific URLs. Use for comparing documents, extracting specific information, summarizing web pages. Max 20 URLs per request.
+parameters:
+  - name: urls
+    type: string
+    required: true
+    label:
+      en_US: URLs
+      ja_JP: URL
+      zh_Hans: URL
+    human_description:
+      en_US: URLs to analyze (comma-separated, max 20)
+      ja_JP: 分析する URL（カンマ区切り、最大 20）
+      zh_Hans: 要分析的 URL（逗号分隔，最多 20 个）
+    llm_description: Comma-separated list of URLs to analyze (max 20)
+    form: llm
+  - name: query
+    type: string
+    required: true
+    label:
+      en_US: Analysis Query
+      ja_JP: 分析クエリ
+      zh_Hans: 分析查询
+    human_description:
+      en_US: What to analyze or extract from the URLs
+      ja_JP: URL から分析または抽出する内容
+      zh_Hans: 从 URL 中分析或提取的内容
+    llm_description: Instructions for what to analyze or extract from the URLs
+    form: llm
+  - name: language
+    type: select
+    required: false
+    default: ja
+    options:
+      - value: ja
+        label:
+          en_US: Japanese
+          ja_JP: 日本語
+          zh_Hans: 日语
+      - value: en
+        label:
+          en_US: English
+          ja_JP: 英語
+          zh_Hans: 英语
+    label:
+      en_US: Response Language
+      ja_JP: 回答言語
+      zh_Hans: 响应语言
+    human_description:
+      en_US: Language for the response
+      ja_JP: 回答の言語
+      zh_Hans: 响应的语言
+    llm_description: Language for the response (ja or en)
+    form: form
+extra:
+  python:
+    source: tools/analyze_urls.py

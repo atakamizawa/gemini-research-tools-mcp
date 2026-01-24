@@ -1,0 +1,43 @@
+version: 0.1.0
+type: plugin
+author: atakamizawa
+name: gemini-research
+label:
+  en_US: Gemini Research Tools
+  ja_JP: Gemini リサーチツール
+  zh_Hans: Gemini 研究工具
+description:
+  en_US: Comprehensive research tools powered by Google Gemini API. Includes deep research, quick search, and URL analysis capabilities.
+  ja_JP: Google Gemini API を活用した包括的なリサーチツール。Deep Research、高速検索、URL 分析機能を提供します。
+  zh_Hans: 由 Google Gemini API 提供支持的综合研究工具。包括深度研究、快速搜索和 URL 分析功能。
+icon: icon.svg
+created_at: 2025-01-24T00:00:00Z
+resource:
+  memory: 268435456
+  permission:
+    tool:
+      enabled: true
+    model:
+      enabled: true
+      llm: true
+    storage:
+      enabled: true
+      size: 10485760
+plugins:
+  tools:
+    - provider/gemini_research.yaml
+meta:
+  version: 0.0.1
+  arch:
+    - amd64
+    - arm64
+  runner:
+    language: python
+    version: "3.12"
+    entrypoint: main
+  minimum_dify_version: 1.0.0
+privacy: PRIVACY.md
+verified: false
+tags:
+  - search
+  - productivity

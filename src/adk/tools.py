@@ -94,7 +94,7 @@ def deep_research(
     format_instructions: Optional[str] = None,
     timeout: int = 3600,
 ) -> dict:
-    """深層リサーチを実行する。
+    """Deep Research を実行する。
 
     Gemini Deep Research Agentを使用して、指定されたトピックについて
     詳細なリサーチを行い、引用付きのレポートを生成します。
@@ -162,7 +162,7 @@ def start_deep_research(
     query: str,
     format_instructions: Optional[str] = None,
 ) -> dict:
-    """深層リサーチを開始する（非同期）。
+    """Deep Research を開始する（非同期）。
 
     リサーチを開始し、すぐにインタラクションIDを返します。
     結果は get_research_status と get_research_result で取得してください。

@@ -1,0 +1,65 @@
+identity:
+  author: atakamizawa
+  name: gemini_research
+  label:
+    en_US: Gemini Research
+    ja_JP: Gemini リサーチ
+    zh_Hans: Gemini 研究
+  description:
+    en_US: Research tools powered by Google Gemini API including deep research, quick search, and URL analysis.
+    ja_JP: Google Gemini API を使用した調査ツール。ディープリサーチ、クイック検索、URL分析に対応。
+    zh_Hans: 由 Google Gemini API 提供支持的研究工具，包括深度研究、快速搜索和 URL 分析。
+  icon: icon.svg
+  tags:
+    - search
+    - productivity
+credentials_for_provider:
+  gemini_api_key:
+    type: secret-input
+    required: true
+    label:
+      en_US: Gemini API Key
+      ja_JP: Gemini API キー
+      zh_Hans: Gemini API 密钥
+    placeholder:
+      en_US: Please input your Gemini API key
+      ja_JP: Gemini API キーを入力してください
+      zh_Hans: 请输入您的 Gemini API 密钥
+    help:
+      en_US: Get your Gemini API key from Google AI Studio
+      ja_JP: Google AI Studio から Gemini API キーを取得してください
+      zh_Hans: 从 Google AI Studio 获取您的 Gemini API 密钥
+    url: https://aistudio.google.com/app/apikey
+  default_quick_model:
+    type: select
+    required: false
+    default: gemini-3-flash-preview
+    options:
+      - value: gemini-3-flash-preview
+        label:
+          en_US: Gemini 3 Flash (Fast, Recommended)
+          ja_JP: Gemini 3 Flash (高速、推奨)
+          zh_Hans: Gemini 3 Flash (快速，推荐)
+      - value: gemini-3-pro-preview
+        label:
+          en_US: Gemini 3 Pro (Powerful)
+          ja_JP: Gemini 3 Pro (高性能)
+          zh_Hans: Gemini 3 Pro (强大)
+    label:
+      en_US: Model for Quick Search
+      ja_JP: 高速検索用モデル
+      zh_Hans: 快速搜索模型
+    help:
+      en_US: Select the model for quick_search, analyze_urls, and search_and_analyze tools
+      ja_JP: quick_search, analyze_urls, search_and_analyze で使用するモデルを選択
+      zh_Hans: 选择 quick_search、analyze_urls 和 search_and_analyze 工具使用的模型
+tools:
+  - tools/deep_research.yaml
+  - tools/get_research_status.yaml
+  - tools/get_research_result.yaml
+  - tools/quick_search.yaml
+  - tools/analyze_urls.yaml
+  - tools/search_and_analyze.yaml
+extra:
+  python:
+    source: provider/gemini_research.py

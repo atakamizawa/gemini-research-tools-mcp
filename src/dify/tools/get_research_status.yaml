@@ -1,0 +1,30 @@
+identity:
+  name: get_research_status
+  author: atakamizawa
+  label:
+    en_US: Get Research Status
+    ja_JP: 🔬 Deep Research：進捗確認
+    zh_Hans: 获取研究状态
+description:
+  human:
+    en_US: Check the status of an ongoing research task. Use this to check if a deep research task has completed.
+    ja_JP: 「Deep Research：開始」で開始したリサーチの進捗状況を確認します。ステータスが「completed」になったら「結果取得」でレポートを取得できます。
+    zh_Hans: 检查正在进行的研究任务的状态。用于检查深度研究任务是否已完成。
+  llm: Check if a research task has completed. Returns status (in_progress, completed, failed). Use this to poll for completion before calling get_research_result.
+parameters:
+  - name: interaction_id
+    type: string
+    required: true
+    label:
+      en_US: Interaction ID
+      ja_JP: インタラクション ID
+      zh_Hans: 交互 ID
+    human_description:
+      en_US: The interaction ID returned from deep_research
+      ja_JP: deep_research から返されたインタラクション ID
+      zh_Hans: 从 deep_research 返回的交互 ID
+    llm_description: The interaction ID from a previous deep_research call
+    form: llm
+extra:
+  python:
+    source: tools/get_research_status.py

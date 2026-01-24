@@ -8,7 +8,7 @@ Gemini API の各種リサーチ機能を統合し、MCP Server / Web UI / CLI /
 
 | 機能              | 説明                                            | レイテンシ | ユースケース                               |
 | ----------------- | ----------------------------------------------- | ---------- | ------------------------------------------ |
-| **Deep Research** | Interactions API を使用した包括的な深層リサーチ | 分単位     | 詳細レポート、市場分析、競合調査           |
+| **Deep Research** | Interactions API を使用した包括的な Deep Research | 分単位     | 詳細レポート、市場分析、競合調査           |
 | **Quick Search**  | Google Search grounding による高速 Web 検索     | 秒単位     | 最新ニュース、ファクトチェック、簡単な質問 |
 | **URL Analysis**  | URL Context tool による特定 URL の分析・比較    | 秒単位     | 記事比較、ドキュメント要約、コード分析     |
 
@@ -18,6 +18,7 @@ Gemini API の各種リサーチ機能を統合し、MCP Server / Web UI / CLI /
 - **Web UI** - Streamlit ベースのシンプルなウェブインターフェース
 - **ADK Tool** - Google ADK エージェントのツールとして利用
 - **CLI** - コマンドラインからの実行
+- **Dify Plugin** - Dify プラットフォームのプラグインとして利用
 
 ## 📋 前提条件
 
@@ -112,7 +113,7 @@ Interactions API を使用して、複雑なトピックについて自律的に
 
 | ツール名                | 説明                               | レイテンシ |
 | ----------------------- | ---------------------------------- | ---------- |
-| `deep_research`         | トピックについて深層リサーチを実行 | 分単位     |
+| `deep_research`         | トピックについて Deep Research を実行 | 分単位     |
 | `get_research_status`   | リサーチの状態を確認               | 秒単位     |
 | `get_research_result`   | 完了したリサーチの結果を取得       | 秒単位     |
 | `ask_followup_question` | フォローアップ質問                 | 秒単位     |
@@ -244,6 +245,33 @@ agent = Agent(
 )
 ```
 
+### 5. Dify Plugin
+
+[Dify](https://dify.ai/) プラットフォームのプラグインとして利用できます。
+
+#### インストール
+
+```bash
+# プラグインをパッケージ化
+cd src
+dify plugin package ./dify
+
+# 生成された gemini-research.difypkg を Dify にアップロード
+```
+
+#### 利用可能なツール
+
+| ツール名              | 説明                                            | レイテンシ |
+| --------------------- | ----------------------------------------------- | ---------- |
+| `deep_research`       | Gemini Deep Research Agent による包括的リサーチ | 分単位     |
+| `get_research_status` | リサーチタスクの状態確認                        | 秒単位     |
+| `get_research_result` | 完了したリサーチの結果取得                      | 秒単位     |
+| `quick_search`        | Google Search grounding による高速検索          | 秒単位     |
+| `analyze_urls`        | 特定 URL の内容分析                             | 秒単位     |
+| `search_and_analyze`  | Web 検索 + URL 分析のコンボ                     | 秒単位     |
+
+詳細は [src/dify/README.md](src/dify/README.md) を参照してください。
+
 ## 📁 プロジェクト構造
 
 ```
@@ -258,8 +286,13 @@ gemini-research-tools-mcp/
 │   │   └── tools.py    # ADKカスタムツール
 │   ├── cli/            # CLIツール
 │   │   └── main.py     # Typer CLI
-│   └── ui/             # Web UI
-│       └── app.py      # Streamlit
+│   ├── ui/             # Web UI
+│   │   └── app.py      # Streamlit
+│   └── dify/           # Dify プラグイン
+│       ├── main.py     # プラグインエントリーポイント
+│       ├── manifest.yaml
+│       ├── provider/   # プロバイダー設定
+│       └── tools/      # ツール実装
 ├── tests/              # テスト
 ├── pyproject.toml
 ├── requirements.txt
@@ -287,7 +320,7 @@ gemini-research-tools-mcp/
 
 ### DeepResearchClient
 
-Interactions API を使用した深層リサーチ用クライアント。
+Interactions API を使用した Deep Research 用クライアント。
 
 ```python
 from src.core.client import DeepResearchClient
@@ -376,7 +409,7 @@ print(result.content)
 
 ### Gemini API ドキュメント
 
-- [Deep Research Agent](https://ai.google.dev/gemini-api/docs/deep-research) - Interactions API を使用した深層リサーチ
+- [Deep Research Agent](https://ai.google.dev/gemini-api/docs/deep-research) - Interactions API を使用した Deep Research
 - [Interactions API](https://ai.google.dev/gemini-api/docs/interactions) - 長時間実行タスク用 API
 - [Google Search Grounding](https://ai.google.dev/gemini-api/docs/grounding) - リアルタイム Web 検索
 - [URL Context](https://ai.google.dev/gemini-api/docs/url-context) - 特定 URL の分析
